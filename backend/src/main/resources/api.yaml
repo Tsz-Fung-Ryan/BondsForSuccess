@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Bonds For Success Api
+  description: Api outlining the rest calls for the Bonds For Success project
+
+servers:
+  - url: localhost:8080
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+security:
+  - BasicAuth: []
+
+paths:
+  /createTable:
+    post:
+      description: GIVEN a mentee and mentor table THEN return a merged table
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successfully created merged table
