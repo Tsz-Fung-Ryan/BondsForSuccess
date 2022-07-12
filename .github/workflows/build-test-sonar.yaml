@@ -11,13 +11,15 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
-    uses: ./frontend/bonds-for-success
     steps:
       - name: Checkout Repo
         uses: actions/checkout@main
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+      - name: Navigate to Frontend Folder
+        run: |
+          cd frontend/bonds-for-success
       - name: Install Dependencies
         run: |
           npm install
