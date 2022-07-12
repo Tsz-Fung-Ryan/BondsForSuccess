@@ -16,6 +16,12 @@ security:
   - BasicAuth: []
 
 paths:
+  /helloWorld:
+    get:
+      description: Hello World
+      responses:
+        '200':
+          description: "Hello World"
   /createTable:
     post:
       description: GIVEN a mentee and mentor table THEN return a merged table
@@ -26,12 +32,13 @@ paths:
             schema:
               type: object
               properties:
-                file:
+                menteeFile:
                   type: string
                   format: binary
-                file:
+                mentorFile:
                   type: string
                   format: binary
       responses:
         '200':
           description: Successfully created merged table
+          
