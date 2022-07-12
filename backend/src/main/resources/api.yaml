@@ -27,10 +27,11 @@ paths:
               type: object
               properties:
                 file:
-                  type: array
-                  items:
-                    type: string
-                    format: binary
+                  type: string
+                  format: binary
+                file:
+                  type: string
+                  format: binary
       responses:
         '200':
           description: Successfully created merged table
