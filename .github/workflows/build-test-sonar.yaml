@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
       - name: Install Dependencies
         run: |
-          npm ci
+          npm install
       - name: Run Jest tests for frontend
         run: |
           npm run test -- --coverage
