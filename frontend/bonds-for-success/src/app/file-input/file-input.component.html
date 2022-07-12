@@ -3,7 +3,7 @@
     <mat-grid-tile>
       <ngx-file-drop
         dropZoneLabel="Drop mentee file here"
-        (onFileDrop)="dropped($event, menteeFileIdentifier)" 
+        (onFileDrop)="handleFileDropped($event, menteeFileIdentifier)" 
         (onFileOver)="fileOver($event)"
         (onFileLeave)="fileLeave($event)"
       >
@@ -17,7 +17,7 @@
     <mat-grid-tile>
       <ngx-file-drop
       dropZoneLabel="Drop mentor file here"
-      (onFileDrop)="dropped($event, mentorFileIdentifier)" 
+      (onFileDrop)="handleFileDropped($event, mentorFileIdentifier)" 
       (onFileOver)="fileOver($event)"
       (onFileLeave)="fileLeave($event)"
     >

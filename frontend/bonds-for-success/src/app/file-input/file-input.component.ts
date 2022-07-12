@@ -18,7 +18,7 @@ export class FileInputComponent {
     private tablesService: TablesService,
   ) {}
 
-  dropped(files: NgxFileDropEntry[], fileToOverwrite: string): void {
+  handleFileDropped(files: NgxFileDropEntry[], fileToOverwrite: string): void {
     const firstDroppedFile = files[0];
 
     // Is it a file?
@@ -63,11 +63,11 @@ export class FileInputComponent {
     await this.tablesService.uploadFiles(fileOne, fileTwo);
   }
 
-  fileOver(event: any) {
-    console.log(event);
-  }
+  // fileOver(event: any) {
+  //   console.log(event);
+  // }
 
-  fileLeave(event: any) {
-    console.log(event);
-  }
+  // fileLeave(event: any) {
+  //   console.log(event);
+  // }
 }
