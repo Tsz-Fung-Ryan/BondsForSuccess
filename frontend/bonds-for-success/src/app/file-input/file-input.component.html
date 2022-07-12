@@ -1,10 +1,9 @@
 <div class="center">
   <mat-grid-list cols="2">
-    <!-- TODO: Look into replacing these with a conditional template or something -->
     <mat-grid-tile>
       <ngx-file-drop
         dropZoneLabel="Drop mentee file here"
-        (onFileDrop)="dropped($event, menteeFiles)" 
+        (onFileDrop)="dropped($event, menteeFileIdentifier)" 
         (onFileOver)="fileOver($event)"
         (onFileLeave)="fileLeave($event)"
       >
@@ -18,7 +17,7 @@
     <mat-grid-tile>
       <ngx-file-drop
       dropZoneLabel="Drop mentor file here"
-      (onFileDrop)="dropped($event, mentorFiles)" 
+      (onFileDrop)="dropped($event, mentorFileIdentifier)" 
       (onFileOver)="fileOver($event)"
       (onFileLeave)="fileLeave($event)"
     >
@@ -38,8 +37,11 @@
         </tr>
       </thead>
       <tbody class="upload-name-style">
-        <tr *ngFor="let item of menteeFiles; let i=index">
-          <td><strong>{{ item.relativePath }}</strong></td>
+        <tr>
+          <td><strong>{{ menteeFile?.relativePath }}</strong></td>
+        </tr>
+        <tr>
+          <td><strong>{{ mentorFile?.relativePath }}</strong></td>
         </tr>
       </tbody>
     </table>

@@ -8,15 +8,17 @@ import { TablesService } from '../services/tables.service';
   styleUrls: ['./file-input.component.scss']
 })
 export class FileInputComponent {
+  public menteeFileIdentifier = 'menteeFile';
+  public mentorFileIdentifier = 'mentorFile';
 
-  public menteeFiles: NgxFileDropEntry | undefined;
-  public mentorFiles: NgxFileDropEntry | undefined;
+  public menteeFile: NgxFileDropEntry | undefined;
+  public mentorFile: NgxFileDropEntry | undefined;
 
   constructor(
     private tablesService: TablesService,
   ) {}
 
-  dropped(files: NgxFileDropEntry[], fileArrayToOverwrite: NgxFileDropEntry): void {
+  dropped(files: NgxFileDropEntry[], fileToOverwrite: string): void {
     const firstDroppedFile = files[0];
 
     // Is it a file?
@@ -27,7 +29,11 @@ export class FileInputComponent {
         // Here you can access the real file
         console.log(firstDroppedFile.relativePath, file);
 
-        fileArrayToOverwrite = firstDroppedFile;
+        if (fileToOverwrite === this.menteeFileIdentifier) {
+          this.menteeFile = firstDroppedFile;
+        } else if (fileToOverwrite === this.mentorFileIdentifier) {
+          this.mentorFile = firstDroppedFile;
+        }
 
         /**
         // You could upload it like this:
