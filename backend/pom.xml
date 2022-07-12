@@ -133,8 +133,10 @@
             		<configuration>
                 		<inputSpec>${project.basedir}/src/main/resources/apis/api.yaml</inputSpec>
                 		<generatorName>spring</generatorName>
+                		<apiPackage>com.cic.openapi.api</apiPackage>
+                		<modelPackage>com.cic.openapi.model</modelPackage>
                 		<configOptions>
-                   			<sourceFolder>src/gen/java/main</sourceFolder>
+                    		<delegatePattern>true</delegatePattern>
                 		</configOptions>
             		</configuration>
         			</execution>
