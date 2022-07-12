@@ -17,11 +17,9 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
-      - name: Navigate to Frontend Folder
-        run: |
-          cd frontend/bonds-for-success
       - name: Install Dependencies
         run: |
+          cd frontend/bonds-for-success
           npm install
       - name: Run Jest tests for frontend
         run: |
