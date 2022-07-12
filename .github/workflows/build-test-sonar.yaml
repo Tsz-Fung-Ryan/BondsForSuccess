@@ -23,4 +23,5 @@ jobs:
           npm install
       - name: Run Jest tests for frontend
         run: |
+          cd frontend/bonds-for-success
           npm run test -- --coverage
