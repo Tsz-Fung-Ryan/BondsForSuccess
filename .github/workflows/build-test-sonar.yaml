@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
+    uses: ./frontend/bonds-for-success
     steps:
       - name: Checkout Repo
         uses: actions/checkout@main
