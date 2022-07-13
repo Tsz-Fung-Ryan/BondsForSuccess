@@ -1,0 +1,27 @@
+<!-- TODO: Look into adding the mat-elevation stuff to make the table pop -->
+<table
+  #menteeMentorTable
+  mat-table
+  cdkDropList
+  class="mat-elevation-z8"
+  [dataSource]="menteeMentorData"
+  (cdkDropListDropped)="drop($event)"
+>
+  <!-- TODO: Verify that this is the correct way to add a caption in the material table -->
+  <caption>Table of mentee and mentor matches</caption>
+  <ng-container matColumnDef="mentee">
+    <th mat-header-cell *matHeaderCellDef> Mentee </th>
+    <!-- TODO: Figure out how to add multiple cells with a single header -->
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentee.name}} </td>
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentee.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="mentor">
+    <th mat-header-cell *matHeaderCellDef> Mentor </th>
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentor.name}} </td>
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentor.email}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row cdkDrag *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
