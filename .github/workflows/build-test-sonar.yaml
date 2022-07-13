@@ -1,0 +1,27 @@
+name: Build and Test Frontend App
+on:
+  # Trigger analysis when pushing in development, or production, or pull requests, and when creating a pull request.
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@main
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: Install Dependencies
+        run: |
+          cd frontend/bonds-for-success
+          npm install
+      - name: Run Jest tests for frontend
+        run: |
+          cd frontend/bonds-for-success
+          npm run test -- --coverage

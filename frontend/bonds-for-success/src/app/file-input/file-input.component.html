@@ -1,0 +1,45 @@
+<div class="center">
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <ngx-file-drop
+        dropZoneLabel="Drop mentee file here"
+        (onFileDrop)="handleFileDropped($event, menteeFileIdentifier)" 
+      >
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Optional custom content that replaces the the entire default content.
+          <button type="button" (click)="openFileSelector()">Browse Files</button>
+        </ng-template>
+      </ngx-file-drop>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <ngx-file-drop
+      dropZoneLabel="Drop mentor file here"
+      (onFileDrop)="handleFileDropped($event, mentorFileIdentifier)" 
+    >
+      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        Optional custom content that replaces the the entire default content.
+        <button type="button" (click)="openFileSelector()">Browse Files</button>
+      </ng-template>
+    </ngx-file-drop>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="upload-table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody class="upload-name-style">
+        <tr>
+          <td><strong>{{ menteeFile?.relativePath }}</strong></td>
+        </tr>
+        <tr>
+          <td><strong>{{ mentorFile?.relativePath }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
