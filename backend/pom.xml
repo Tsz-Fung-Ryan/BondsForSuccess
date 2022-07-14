@@ -133,9 +133,11 @@
             		<configuration>
                 		<inputSpec>${project.basedir}/src/main/resources/apis/api.yaml</inputSpec>
                 		<generatorName>spring</generatorName>
-                		<apiPackage>com.cic.openapi.api</apiPackage>
-                		<modelPackage>com.cic.openapi.model</modelPackage>
                 		<configOptions>
+                		     <apiPackage>com.cic.openapi.api</apiPackage>
+                			<modelPackage>com.cic.openapi.model</modelPackage>
+                			<artifactId>bonds-for-success</artifactId>
+                			<interfaceOnly>true</interfaceOnly>
                     		<delegatePattern>true</delegatePattern>
                 		</configOptions>
             		</configuration>
