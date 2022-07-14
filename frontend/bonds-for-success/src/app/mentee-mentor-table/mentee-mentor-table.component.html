@@ -53,6 +53,8 @@
     > Mentee </th>
   </ng-container>
 
+  <!-- TODO: Move into ts file like other header variable -->
+  <!-- TODO: Try and move these to the top above the definitions -->
   <tr mat-header-row *matHeaderRowDef="['header-row-mentor', 'header-row-mentee']"></tr>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row cdkDrag *matRowDef="let row; columns: displayedColumns;"></tr>
