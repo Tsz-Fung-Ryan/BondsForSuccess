@@ -71,6 +71,8 @@ components:
       properties:
         name:
           type: string
+        emailAddress:
+          type: string
         keywords:
           type: array
           items:
@@ -78,6 +80,7 @@ components:
           uniqueItems: true
       required:
         - name
+        - emailAddress
 
 security:
   - BasicAuth: []

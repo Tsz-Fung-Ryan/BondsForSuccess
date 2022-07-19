@@ -14,7 +14,7 @@ import com.cic.openapi.api.HelloWorldApi;
 import com.cic.openapi.model.Match;
 import com.cic.openapi.model.Person;
 import com.cic.service.MatchingService;
-import com.cic.service.PersonService;
+import com.cic.service.person.PersonService;
 
 @RestController
 public class MainController implements HelloWorldApi, CreateTableApi {
