@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest"
+    "test": "jest",
+    "generate:api": "openapi-generator-cli generate -i ./src/app/libs/api/contracts/api.yaml -g typescript-angular -o ./src/app/libs/api/generated-code/api/"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@angular-devkit/build-angular": "^14.0.5",
     "@angular/cli": "~14.0.5",
     "@angular/compiler-cli": "^14.0.0",
+    "@openapitools/openapi-generator-cli": "^2.5.1",
     "@types/jest": "^28.1.4",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",

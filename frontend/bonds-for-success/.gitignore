@@ -37,6 +37,9 @@ yarn-error.log
 testem.log
 /typings
 
+# Generated frontend code
+src/app/libs/api/generated-code/
+
 # System files
 .DS_Store
 Thumbs.db
