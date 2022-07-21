@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -15,6 +16,8 @@ import { MenteeMentorTableComponent } from './mentee-mentor-table/mentee-mentor-
 
 import { TablesService } from './services/tables.service';
 
+import { ApiModule } from './libs/api/generated-code/api';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,10 +25,12 @@ import { TablesService } from './services/tables.service';
     MenteeMentorTableComponent,
   ],
   imports: [
+    ApiModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     DragDropModule,
+    HttpClientModule,
     MatGridListModule,
     MatTableModule,
     NgxFileDropModule,
