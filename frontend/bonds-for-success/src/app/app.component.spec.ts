@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { AppComponent } from './app.component';
 import { FileInputComponent } from './file-input/file-input.component';
+import { MenteeMentorTableComponent } from './mentee-mentor-table/mentee-mentor-table.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,6 +14,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         MockComponent(FileInputComponent),
+        MockComponent(MenteeMentorTableComponent),
       ],
     }).compileComponents();
   });
