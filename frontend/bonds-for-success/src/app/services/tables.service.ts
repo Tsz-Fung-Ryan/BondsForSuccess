@@ -17,10 +17,8 @@ export class TablesService {
 
     if (menteeFileSystemEntry.isFile && mentorFileSystemEntry.isFile) {
       const menteeFileSystemFileEntry = menteeFileSystemEntry as FileSystemFileEntry;
-      const menteeBlobFile = await this.getFileFromFileSystemFileEntry(menteeFileSystemFileEntry);
-
       const mentorFileSystemFileEntry = mentorFileSystemEntry as FileSystemFileEntry;
-      const mentorBlobFile = await this.getFileFromFileSystemFileEntry(mentorFileSystemFileEntry);
+      const [ menteeBlobFile, mentorBlobFile ] = await Promise.all([this.getFileFromFileSystemFileEntry(menteeFileSystemFileEntry), this.getFileFromFileSystemFileEntry(mentorFileSystemFileEntry)]);
 
       return lastValueFrom(this.defaultService.createTablePost(menteeBlobFile, mentorBlobFile));
     }
