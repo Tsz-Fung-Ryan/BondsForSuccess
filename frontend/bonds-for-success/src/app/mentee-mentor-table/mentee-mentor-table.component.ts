@@ -69,6 +69,7 @@ export class MenteeMentorTableComponent {
   @ViewChild('menteeMentorTable') menteeMentorTable: MatTable<MenteeMentorData> | undefined;
 
   public displayedColumns = ['menteeName', 'menteeEmail', 'mentorName', 'mentorEmail'];
+  public displayedHeaderRowColums = ['header-row-mentor', 'header-row-mentee'];
   public menteeMentorData = MENTEE_MENTOR_DATA;
 
   drop(event: CdkDragDrop<string[]>) {
