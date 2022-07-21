@@ -15,7 +15,7 @@ public class AppConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);
 
   @Value("#{${mentee.key.mappings}}")
-  Map<PersonKeys, String> menteeMapping;
+  Map<String, PersonKeys> menteeMapping;
 
   @Bean
   MatchingService matchingService() {

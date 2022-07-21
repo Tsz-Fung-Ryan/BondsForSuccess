@@ -2,6 +2,7 @@ package com.cic.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +41,8 @@ public class MainController implements HelloWorldApi, CreateTableApi {
   @PostMapping("/createTable")
   public ResponseEntity<List<Match>> createTablePost(MultipartFile menteeFile,
       MultipartFile mentorFile) {
-    Person[] mentees = personService.convertFileToPerson(menteeFile);
-    Person[] mentors = personService.convertFileToPerson(mentorFile);
+    Set<Person> mentees = personService.convertFileToPeople(menteeFile);
+    Set<Person> mentors = personService.convertFileToPeople(mentorFile);
 
     List<Match> matches = matchingService.returnMatches(mentees, mentors);
 
