@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MockComponent } from 'ng-mocks';
@@ -17,6 +18,7 @@ describe('FileInputComponent', () => {
       ],
       imports: [
         MatGridListModule,
+        HttpClientTestingModule,
       ],
     }).compileComponents();
 
