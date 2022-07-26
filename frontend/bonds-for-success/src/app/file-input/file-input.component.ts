@@ -61,6 +61,20 @@ export class FileInputComponent {
   }
 
   async uploadFiles(fileOne: NgxFileDropEntry, fileTwo: NgxFileDropEntry): Promise<void> {
-    await this.tablesService.uploadFiles(fileOne, fileTwo);
+    try {
+      const result = await this.tablesService.uploadFiles(fileOne, fileTwo);
+
+      // Save result to a service that is used by the mentee/mentor table
+    } catch(error) {
+      this.snackBar.open(
+        `${error}`,
+        undefined,
+        {
+          duration: 4000,
+          verticalPosition: 'top',
+        },
+      );
+    }
+
   }
 }

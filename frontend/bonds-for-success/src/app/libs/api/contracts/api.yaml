@@ -36,14 +36,14 @@ paths:
                   format: binary
       responses:
         '200':
-          description: Successfully created merged table
+          description: Successfully created merged 
           content:
-            text/plain:
+            application/json:
               schema:
                 type: array
                 items:
-                  type: Match
-
+                  $ref: '#/components/schemas/Match'
+                  
 components:
   securitySchemes:
     BasicAuth:
@@ -54,9 +54,9 @@ components:
       type: object
       properties:
         mentor:
-          type: Person
+          $ref: '#/components/schemas/Person'
         mentee:
-          type: Person
+          $ref: '#/components/schemas/Person'
         keywordsShared:
           type: array
           items:
