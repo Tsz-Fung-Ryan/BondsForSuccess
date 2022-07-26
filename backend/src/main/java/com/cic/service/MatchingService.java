@@ -2,6 +2,7 @@ package com.cic.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import com.cic.openapi.model.Match;
 import com.cic.openapi.model.Person;
 import com.cic.service.matching.MatchingAlgorithm;
@@ -14,12 +15,12 @@ public class MatchingService {
     this.matcher = matcher;
   }
 
-  public List<Match> returnMatches(Person[] mentors, Person[] mentee) {
+  public List<Match> returnMatches(Set<Person> mentees, Set<Person> mentors) {
     List<Match> matches = new ArrayList<>();
 
-    for (int i = 0; i < mentors.length; i++) {
-      matches.add(new Match().mentor(mentors[i]).mentee(mentee[i]));
-    }
+    // for (int i = 0; i < mentees.length; i++) {
+    // matches.add(new Match().mentor(mentees[i]).mentee(mentors[i]));
+    // }
 
     return matches;
   }
