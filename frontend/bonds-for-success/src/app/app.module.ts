@@ -3,7 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,7 +34,9 @@ import { ApiModule } from './libs/api/generated-code/api';
     DragDropModule,
     HttpClientModule,
     MatGridListModule,
+    MatSnackBarModule,
     MatTableModule,
+    MatTabsModule,
     NgxFileDropModule,
   ],
   providers: [

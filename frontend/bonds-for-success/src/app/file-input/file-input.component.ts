@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { TablesService } from '../services/tables.service';
 
@@ -15,6 +16,7 @@ export class FileInputComponent {
   public mentorFile: NgxFileDropEntry | undefined;
 
   constructor(
+    private snackBar: MatSnackBar,
     private tablesService: TablesService,
   ) {}
 
@@ -40,6 +42,21 @@ export class FileInputComponent {
       // It was a directory (empty directories are added, otherwise only files)
       const fileEntry = firstDroppedFile.fileEntry as FileSystemDirectoryEntry;
       console.log(firstDroppedFile.relativePath, fileEntry);
+    }
+  }
+
+  async uploadMenteeMentorFiles(): Promise<void> {
+    if (this.menteeFile && this.mentorFile) {
+      await this.uploadFiles(this.menteeFile, this.mentorFile);
+    } else {
+      this.snackBar.open(
+        'Please select a mentee and mentor file',
+        undefined,
+        {
+          duration: 4000,
+          verticalPosition: 'top',
+        },
+      );
     }
   }
 
