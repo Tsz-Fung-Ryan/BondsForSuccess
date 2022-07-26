@@ -21,7 +21,10 @@ import com.cic.service.person.PersonService;
 public class MainController implements HelloWorldApi, CreateTableApi {
 
   @Autowired
-  PersonService personService;
+  PersonService menteeService;
+
+  @Autowired
+  PersonService mentorService;
 
   @Autowired
   MatchingService matchingService;
@@ -41,8 +44,8 @@ public class MainController implements HelloWorldApi, CreateTableApi {
   @PostMapping("/createTable")
   public ResponseEntity<List<Match>> createTablePost(MultipartFile menteeFile,
       MultipartFile mentorFile) {
-    Set<Person> mentees = personService.convertFileToPeople(menteeFile);
-    Set<Person> mentors = personService.convertFileToPeople(mentorFile);
+    Set<Person> mentees = menteeService.convertFileToPeople(menteeFile);
+    Set<Person> mentors = mentorService.convertFileToPeople(mentorFile);
 
     List<Match> matches = matchingService.returnMatches(mentees, mentors);
 

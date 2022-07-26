@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.cic.service.MatchingService;
+import com.cic.service.matching.BasicMatcher;
 import com.cic.service.person.PersonKeys;
 import com.cic.service.person.PersonService;
 
@@ -17,13 +18,29 @@ public class AppConfig {
   @Value("#{${mentee.key.mappings}}")
   Map<String, PersonKeys> menteeMapping;
 
+  @Value("#{${mentee.key.mappings}}")
+  Map<String, PersonKeys> mentorMapping;
+
+  @Value("${acceptedThreshold}")
+  float acceptedThreshold;
+
   @Bean
-  MatchingService matchingService() {
-    return new MatchingService(null);
+  BasicMatcher basicMatcher() {
+    return new BasicMatcher();
   }
 
   @Bean
-  PersonService personService() {
+  MatchingService matchingService() {
+    return new MatchingService(basicMatcher(), acceptedThreshold);
+  }
+
+  @Bean
+  PersonService menteeService() {
     return new PersonService(menteeMapping);
+  }
+
+  @Bean
+  PersonService mentorService() {
+    return new PersonService(mentorMapping);
   }
 }

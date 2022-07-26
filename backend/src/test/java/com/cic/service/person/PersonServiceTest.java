@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.cic.openapi.model.Gender;
 import com.cic.openapi.model.Person;
 
 class PersonServiceTest {
@@ -32,6 +33,7 @@ class PersonServiceTest {
     people.forEach(person -> {
       if (person.getName() == "Test Name") {
         assertEquals("test25@queensu.ca", person.getEmailAddress());
+        assertEquals(Gender.MALE, person.getGender());
       }
     });
   }

@@ -12,14 +12,15 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
+import com.cic.openapi.model.Gender;
 import com.cic.openapi.model.Person;
 
 public class PersonService {
   private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
-  private final Map<String, PersonKeys> menteeMapping;
+  private final Map<String, PersonKeys> mapping;
 
-  public PersonService(Map<String, PersonKeys> menteeMapping) {
-    this.menteeMapping = menteeMapping;
+  public PersonService(Map<String, PersonKeys> mapping) {
+    this.mapping = mapping;
   }
 
   public Set<Person> convertEntriesToPeople(final Path path) {
@@ -55,6 +56,9 @@ public class PersonService {
           break;
         case keyWords:
           person.addKeywordsItem(personToBeMapped[key]);
+        case gender:
+          person.setGender(Gender.valueOf(personToBeMapped[key]));
+          break;
       }
     });
     return person;
@@ -65,8 +69,8 @@ public class PersonService {
     final Map<Integer, PersonKeys> headerMap = new HashMap<>();
 
     for (int i = 0; i < columns.length; i++) {
-      if (menteeMapping.containsKey(columns[i])) {
-        headerMap.put(Integer.valueOf(i), menteeMapping.get(columns[i]));
+      if (mapping.containsKey(columns[i])) {
+        headerMap.put(Integer.valueOf(i), mapping.get(columns[i]));
       }
     }
 
