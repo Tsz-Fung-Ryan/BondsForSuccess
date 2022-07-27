@@ -21,6 +21,10 @@ jobs:
         run: |
           cd frontend/bonds-for-success
           npm install
+      - name: Generate Api Code
+        run: |
+          cd frontend/bonds-for-success
+          npm run generate:api
       - name: Run Jest tests for frontend
         run: |
           cd frontend/bonds-for-success
