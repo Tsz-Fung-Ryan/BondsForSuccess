@@ -1,5 +1,5 @@
 package com.cic.service.person;
 
 public enum PersonKeys {
-  name, emailAddress, keyWords, gender
+  name, emailAddress, keyWords, gender, genderPreference
 }

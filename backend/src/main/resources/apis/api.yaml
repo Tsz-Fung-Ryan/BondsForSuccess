@@ -53,8 +53,14 @@ components:
     Gender:
       type: string
       enum:
-        - male
-        - female
+        - Male
+        - Female
+    GenderPreference:
+      type: String
+      enum:
+        - Male
+        - Female
+        - No Preference
     Match:
       type: object
       properties:
@@ -84,6 +90,8 @@ components:
           uniqueItems: true
         gender:
           $ref: '#/components/schema/Gender'
+        genderPreference:
+          $ref: '#/components/schema/GenderPreference'
       required:
         - name
         - emailAddress

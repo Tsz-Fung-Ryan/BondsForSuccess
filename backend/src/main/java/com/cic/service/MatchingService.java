@@ -31,7 +31,9 @@ public class MatchingService {
     return matches;
   }
 
-  private Person findMentorForMentee(Person mentee, Set<Person> mentors) {
+  private Person findMentorForMentee(final Person mentee, final Set<Person> mentors) {
+    // final Map<Gender,Person> genderToMentorMap =
+    // mentors.stream().collect(Collectors.toMap(Person::, null))
     for (Person mentor : mentors) {
       float threshold = matcher.matchingRatio(mentee, mentor);
       if (threshold >= acceptedThreshold) {

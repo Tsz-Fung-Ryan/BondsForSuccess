@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.cic.openapi.model.Gender;
+import com.cic.openapi.model.GenderPreference;
 import com.cic.openapi.model.Person;
 
 class PersonServiceTest {
@@ -31,9 +32,10 @@ class PersonServiceTest {
     Set<Person> people = personService.convertEntriesToPeople(menteePath());
     assertTrue(people.size() > 0);
     people.forEach(person -> {
-      if (person.getName() == "Test Name") {
+      if (person.getName().equals("Test Name")) {
         assertEquals("test25@queensu.ca", person.getEmailAddress());
         assertEquals(Gender.MALE, person.getGender());
+        assertEquals(GenderPreference.NO_PREFERENCE, person.getGenderPreference());
       }
     });
   }
@@ -45,7 +47,10 @@ class PersonServiceTest {
   private Map<String, PersonKeys> testMenteeMapping() {
     final Map<String, PersonKeys> menteeMapping = new HashMap<>();
     menteeMapping.put("What is your name?", PersonKeys.name);
-    menteeMapping.put("Please enter your Email address", PersonKeys.emailAddress);
+    menteeMapping.put("Please enter your Email address.", PersonKeys.emailAddress);
+    menteeMapping.put("Do you identify as:", PersonKeys.gender);
+    menteeMapping.put("Would you like to be matched with someone of a specific gender?",
+        PersonKeys.genderPreference);
 
     return menteeMapping;
   }

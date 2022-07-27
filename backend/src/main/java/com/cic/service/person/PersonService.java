@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import com.cic.openapi.model.Gender;
+import com.cic.openapi.model.GenderPreference;
 import com.cic.openapi.model.Person;
 
 public class PersonService {
@@ -57,7 +58,10 @@ public class PersonService {
         case keyWords:
           person.addKeywordsItem(personToBeMapped[key]);
         case gender:
-          person.setGender(Gender.valueOf(personToBeMapped[key]));
+          person.setGender(Gender.fromValue(personToBeMapped[key]));
+          break;
+        case genderPreference:
+          person.setGenderPreference(GenderPreference.fromValue(personToBeMapped[key]));
           break;
       }
     });
