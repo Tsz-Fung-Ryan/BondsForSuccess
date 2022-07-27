@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxFileDropEntry } from 'ngx-file-drop';
+import { Match } from '../libs/api/generated-code/api';
+import { MatchedResultsService } from '../services/matched-results.service';
 import { TablesService } from '../services/tables.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class FileInputComponent {
   public mentorFile: NgxFileDropEntry | undefined;
 
   constructor(
+    private matchedResultsService: MatchedResultsService,
     private snackBar: MatSnackBar,
     private tablesService: TablesService,
   ) {}
@@ -47,7 +50,19 @@ export class FileInputComponent {
 
   async uploadMenteeMentorFiles(): Promise<void> {
     if (this.menteeFile && this.mentorFile) {
-      await this.uploadFiles(this.menteeFile, this.mentorFile);
+      const matchedResults = await this.uploadFiles(this.menteeFile, this.mentorFile);
+
+      if (matchedResults) {
+        this.matchedResultsService.setMatchedResults(matchedResults);
+        this.snackBar.open(
+          'Uploaded mentee and mentor files. Please proceed to next step',
+          undefined,
+          {
+            duration: 4000,
+            verticalPosition: 'top',
+          },
+        );
+      }
     } else {
       this.snackBar.open(
         'Please select a mentee and mentor file',
@@ -60,11 +75,9 @@ export class FileInputComponent {
     }
   }
 
-  async uploadFiles(fileOne: NgxFileDropEntry, fileTwo: NgxFileDropEntry): Promise<void> {
+  async uploadFiles(fileOne: NgxFileDropEntry, fileTwo: NgxFileDropEntry): Promise<Match[] | undefined> {
     try {
-      const result = await this.tablesService.uploadFiles(fileOne, fileTwo);
-
-      // Save result to a service that is used by the mentee/mentor table
+      return this.tablesService.uploadFiles(fileOne, fileTwo);
     } catch(error) {
       this.snackBar.open(
         `${error}`,
@@ -74,6 +87,7 @@ export class FileInputComponent {
           verticalPosition: 'top',
         },
       );
+      return undefined;
     }
 
   }

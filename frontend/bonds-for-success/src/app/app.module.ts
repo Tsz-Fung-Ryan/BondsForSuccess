@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { MenteeMentorTableComponent } from './mentee-mentor-table/mentee-mentor-table.component';
 
+import { MatchedResultsService } from './services/matched-results.service';
 import { TablesService } from './services/tables.service';
 
 import { ApiModule } from './libs/api/generated-code/api';
@@ -40,6 +41,7 @@ import { ApiModule } from './libs/api/generated-code/api';
     NgxFileDropModule,
   ],
   providers: [
+    MatchedResultsService,
     TablesService,
   ],
   bootstrap: [AppComponent]
