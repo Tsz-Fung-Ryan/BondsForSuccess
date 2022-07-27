@@ -19,19 +19,19 @@ public class MatchingService {
 
   public List<Match> returnMatches(final Set<Person> mentees, final Set<Person> mentors) {
     final List<Match> matches = new ArrayList<>();
-    final Set<Person> tempMentors = mentors;
+    final Set<Person> unmatchedMentors = mentors;
     mentees.forEach(mentee -> {
-      Person mentor = findGoodMatch(mentee, tempMentors);
+      Person mentor = findMentorForMentee(mentee, unmatchedMentors);
       Match match = new Match();
       match.setMentee(mentee);
       match.setMentor(mentor);
       matches.add(match);
-      tempMentors.remove(mentor);
+      unmatchedMentors.remove(mentor);
     });
     return matches;
   }
 
-  private Person findGoodMatch(Person mentee, Set<Person> mentors) {
+  private Person findMentorForMentee(Person mentee, Set<Person> mentors) {
     for (Person mentor : mentors) {
       float threshold = matcher.matchingRatio(mentee, mentor);
       if (threshold >= acceptedThreshold) {

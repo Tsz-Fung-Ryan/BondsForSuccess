@@ -34,12 +34,12 @@ public class AppConfig {
     return new MatchingService(basicMatcher(), acceptedThreshold);
   }
 
-  @Bean
+  @Bean("menteeMapping")
   PersonService menteeService() {
     return new PersonService(menteeMapping);
   }
 
-  @Bean
+  @Bean("mentorMapping")
   PersonService mentorService() {
     return new PersonService(mentorMapping);
   }
