@@ -46,6 +46,7 @@ describe('FileInputComponent', () => {
   });
 
   afterEach(() => {
+    jest.clearAllMocks();
     httpTestingController.verify();
   });
 
@@ -114,6 +115,35 @@ describe('FileInputComponent', () => {
       await component.uploadMenteeMentorFiles();
 
       expect(snackBar.open).toHaveBeenCalledWith(expectedErrorText, undefined, expectedSnackBarConfig);
+    });
+  });
+
+  describe('uploadFiles()', () => {
+    it('should open a snackbar with the error message if an error occurs', async () => {
+      const mockErrorText = 'Something went wrong with table upload request';
+      const mockError = new Error(mockErrorText);
+      
+      const expectedSnackBarConfig = {
+        duration: 4000,
+        verticalPosition: 'top',
+      };
+      const expectedErrorText = `Error: ${mockErrorText}`;
+
+      const mockMenteeFile = {} as NgxFileDropEntry;
+      const mockMentorFile = {} as NgxFileDropEntry;
+
+      jest.spyOn(snackBar, 'open');
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore private access
+      jest.spyOn(component.tablesService, 'uploadFiles').mockRejectedValueOnce(mockError);
+
+      await component.uploadFiles(mockMenteeFile, mockMentorFile);
+
+      expect(snackBar.open).toHaveBeenCalledWith(
+        expectedErrorText,
+        undefined,
+        expectedSnackBarConfig,
+      );
     });
   });
 });
