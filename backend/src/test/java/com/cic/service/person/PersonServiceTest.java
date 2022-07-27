@@ -22,13 +22,12 @@ class PersonServiceTest {
 
   @BeforeEach
   void init() {
-    LOGGER.info(testMenteeMapping().toString());
     personService = new PersonService(testMenteeMapping());
   }
 
   @Test
   @DisplayName("GIVEN a csv of survey data WHEN it is fed to the PersonService THEN a Set of people will be created")
-  void convertFileToPersonTest() {
+  void convertMenteeFileToPersonTest() {
     Set<Person> people = personService.convertEntriesToPeople(menteePath());
     assertTrue(people.size() > 0);
     people.forEach(person -> {
@@ -40,8 +39,25 @@ class PersonServiceTest {
     });
   }
 
+  @Test
+  void convertMentorFileToPersonTest() {
+    Set<Person> people = personService.convertEntriesToPeople(mentorPath());
+    assertTrue(people.size() > 0);
+    people.forEach(person -> {
+      if (person.getName().equals("Professor Test")) {
+        assertEquals("12345@rogers.com", person.getEmailAddress());
+        assertEquals(Gender.MALE, person.getGender());
+        assertEquals(GenderPreference.NO_PREFERENCE, person.getGenderPreference());
+      }
+    });
+  }
+
   private Path menteePath() {
     return Paths.get("src/test/resources/MenteeTestRaw.csv");
+  }
+
+  private Path mentorPath() {
+    return Paths.get("src/test/resources/MentorTestRaw.csv");
   }
 
   private Map<String, PersonKeys> testMenteeMapping() {
