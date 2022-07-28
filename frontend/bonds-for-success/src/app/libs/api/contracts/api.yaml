@@ -43,6 +43,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Match'
+  /downloadFile:
+    post:
+      description: GIVEN an array of matches return into csv
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Match'
+      responses:
+        '200':
+          description: File created
+          content: 
+            text/csv:
+              schema:
+                type: string
+                format: binary
                   
 components:
   securitySchemes:
@@ -50,6 +69,17 @@ components:
       type: http
       scheme: basic
   schemas:
+    Gender:
+      type: string
+      enum:
+        - Male
+        - Female
+    GenderPreference:
+      type: string
+      enum:
+        - Male
+        - Female
+        - No Preference
     Match:
       type: object
       properties:
@@ -65,7 +95,6 @@ components:
       required:
         - mentor
         - mentee
-
     Person:
       type: object
       properties:
@@ -78,9 +107,12 @@ components:
           items:
             type: string
           uniqueItems: true
+        gender:
+          $ref: '#/components/schemas/Gender'
+        genderPreference:
+          $ref: '#/components/schemas/GenderPreference'
       required:
         - name
         - emailAddress
-
 security:
   - BasicAuth: []

@@ -55,7 +55,7 @@ export class FileInputComponent {
       if (matchedResults) {
         this.matchedResultsService.setMatchedResults(matchedResults);
         this.snackBar.open(
-          'Uploaded mentee and mentor files. Please proceed to next step',
+          'Uploaded mentee and mentor files. Please proceed to the `View Mentee/Mentor Matches` tab',
           undefined,
           {
             duration: 4000,
@@ -89,6 +89,5 @@ export class FileInputComponent {
       );
       return undefined;
     }
-
   }
 }
