@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Match, Person } from '../libs/api/generated-code/api';
 import { MatchedResultsService } from '../services/matched-results.service';
+import { TablesService } from '../services/tables.service';
 
 @Component({
   selector: 'mentee-mentor-table',
@@ -24,6 +25,7 @@ export class MenteeMentorTableComponent implements OnInit {
 
   constructor(
     private matchedResults: MatchedResultsService,
+    private tablesService: TablesService,
   ) {}
 
   ngOnInit(): void {
@@ -57,10 +59,10 @@ export class MenteeMentorTableComponent implements OnInit {
     this.mentorTable?.renderRows();
   }
 
-  handleDownloadButtonClicked(): void {
+  async handleDownloadButtonClicked(): Promise<void> {
     const combinedMenteeAndMentorData = this.combineMenteeAndMentorData(this.menteeData, this.mentorData);
 
-    console.log(combinedMenteeAndMentorData);
+    await this.tablesService.downloadMatchedDataAsCsvFile(combinedMenteeAndMentorData);
   }
 
   combineMenteeAndMentorData(menteeData: Person[], mentorData: Person[]): Match[] {

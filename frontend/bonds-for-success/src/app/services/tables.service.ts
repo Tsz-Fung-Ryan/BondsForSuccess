@@ -7,6 +7,8 @@ import { lastValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class TablesService {
+  private DEFAULT_FILE_NAME_OF_CSV_FILE_TO_DOWNLOAD = 'Mentee_Mentor_Matches.csv';
+
   constructor(
     private defaultService: DefaultService,
   ) {}
@@ -23,6 +25,19 @@ export class TablesService {
       return lastValueFrom(this.defaultService.createTablePost(menteeBlobFile, mentorBlobFile));
     }
     throw new Error('One of the passed in dropped files is not a file');
+  }
+
+  async downloadMatchedDataAsCsvFile(matches: Match[]): Promise<void> {
+    const matchesBlobFile = await lastValueFrom(this.defaultService.downloadFilePost(matches));
+
+    const aTag = document.createElement("a");
+    document.body.appendChild(aTag);
+    aTag.setAttribute('style', 'display: none');
+    const url = window.URL.createObjectURL(matchesBlobFile);
+    aTag.href = url;
+    aTag.download = this.DEFAULT_FILE_NAME_OF_CSV_FILE_TO_DOWNLOAD;
+    aTag.click();
+    window.URL.revokeObjectURL(url);
   }
 
   async getFileFromFileSystemFileEntry(fileSystemFileEntry: FileSystemFileEntry): Promise<File> {
