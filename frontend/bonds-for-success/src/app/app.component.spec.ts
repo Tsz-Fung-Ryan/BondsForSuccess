@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { MatTabsModule } from '@angular/material/tabs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, MockModule } from 'ng-mocks';
 import { AppComponent } from './app.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { MenteeMentorTableComponent } from './mentee-mentor-table/mentee-mentor-table.component';
@@ -9,7 +10,8 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MockModule(MatTabsModule),
       ],
       declarations: [
         AppComponent,

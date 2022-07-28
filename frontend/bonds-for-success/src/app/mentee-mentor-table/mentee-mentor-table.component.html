@@ -21,7 +21,7 @@
   <!-- Mentee Email Column -->
   <ng-container matColumnDef="menteeEmail">
     <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentee.email}} </td>
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentee.emailAddress}} </td>
   </ng-container>
 
   <!-- Mentor Name Column -->
@@ -33,7 +33,7 @@
   <!-- Mentor Email Column -->
   <ng-container matColumnDef="mentorEmail">
     <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentor.email}} </td>
+    <td mat-cell *matCellDef="let menteeMentorMatch"> {{menteeMentorMatch.mentor.emailAddress}} </td>
   </ng-container>
 
   <!-- Header row first group -->
@@ -56,3 +56,7 @@
     > Mentee </th>
   </ng-container>
 </table>
+
+<div class="d-flex justify-content-center m-2">
+  <button type="button">Download mentee/mentor match data</button>
+</div>
