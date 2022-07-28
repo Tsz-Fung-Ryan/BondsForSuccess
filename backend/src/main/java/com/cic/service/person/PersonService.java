@@ -2,8 +2,10 @@ package com.cic.service.person;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -87,8 +89,8 @@ public class PersonService {
 
   public Set<Person> convertFileToPeople(MultipartFile file) {
     File tempTable = new File("src/main/resources/initTable.tmp");
-    try {
-      file.transferTo(tempTable);
+    try (OutputStream os = new FileOutputStream(tempTable)) {
+      os.write(file.getBytes());
       return convertEntriesToPeople(tempTable.toPath());
     } catch (Exception e) {
       LOGGER.error("Error occured creating people: {}", e);

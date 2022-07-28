@@ -43,6 +43,7 @@ public class MatchingService {
           mentor -> mentor.getGender().getValue().equals(mentee.getGenderPreference().getValue()))
           .collect(Collectors.toSet());
     }
+
     for (Person mentor : filteredMentors) {
       float threshold = matcher.matchingRatio(mentee, mentor);
       if (threshold >= acceptedThreshold) {
