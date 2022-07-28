@@ -22,7 +22,6 @@ export class TablesService {
 
       return lastValueFrom(this.defaultService.createTablePost(menteeBlobFile, mentorBlobFile));
     }
-
     throw new Error('One of the passed in dropped files is not a file');
   }
 
