@@ -3,7 +3,7 @@
     #menteeTable
     mat-table
     cdkDropList
-    class="mat-elevation-z8 m-2"
+    class="shadow-bottom"
     [dataSource]="menteeData"
     (cdkDropListDropped)="drop($event, menteeData)"
   >
@@ -11,7 +11,7 @@
 
     <tr mat-header-row *matHeaderRowDef="menteeDisplayedHeaderRowColumns"></tr>
     <tr mat-header-row *matHeaderRowDef="menteeDisplayedColumns"></tr>
-    <tr mat-row cdkDrag *matRowDef="let row; columns: menteeDisplayedColumns;"></tr>
+    <tr mat-row cdkDrag *matRowDef="let row; columns: menteeDisplayedColumns;" [class.grey]="isRowEven(row, menteeData)"></tr>
 
     <ng-container matColumnDef="menteeName">
       <!-- Mentee Name Column -->
@@ -32,7 +32,7 @@
         *matHeaderCellDef
         style="text-align: center;"
         [attr.colspan]="2"
-      > Mentee </th>
+      > <h2>Mentee</h2> </th>
     </ng-container>
   </table>
 
@@ -40,7 +40,7 @@
     #mentorTable
     mat-table
     cdkDropList
-    class="mat-elevation-z8 m-2"
+    class="shadow-bottom"
     [dataSource]="mentorData"
     (cdkDropListDropped)="drop($event, mentorData)"
   >
@@ -48,7 +48,7 @@
 
     <tr mat-header-row *matHeaderRowDef="mentorDisplayedHeaderRowColumns"></tr>
     <tr mat-header-row *matHeaderRowDef="mentorDisplayedColumns"></tr>
-    <tr mat-row cdkDrag *matRowDef="let row; columns: mentorDisplayedColumns;"></tr>
+    <tr mat-row cdkDrag *matRowDef="let row; columns: mentorDisplayedColumns;" [class.grey]="isRowEven(row, mentorData)"></tr>
 
     <ng-container matColumnDef="mentorName">
       <!-- Mentor Name Column -->
@@ -69,7 +69,7 @@
         *matHeaderCellDef
         style="text-align: center;"
         [attr.colspan]="2"
-      > Mentor </th>
+      > <h2>Mentor</h2> </th>
     </ng-container>
   </table>
 </div>

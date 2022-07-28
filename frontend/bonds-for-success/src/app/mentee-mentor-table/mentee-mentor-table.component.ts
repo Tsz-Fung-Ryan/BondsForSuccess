@@ -77,4 +77,10 @@ export class MenteeMentorTableComponent implements OnInit {
 
     return combinedMatches;
   }
+
+  isRowEven(row: Person, tableArray: Person[]): boolean {
+    const rowNumber = tableArray.indexOf(row);
+
+    return rowNumber % 2 === 0;
+  }
 }
