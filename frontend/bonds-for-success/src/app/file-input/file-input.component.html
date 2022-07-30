@@ -1,5 +1,5 @@
 <div class="center">
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-around">
     <ngx-file-drop
       class="p-2"
       dropZoneLabel="Drop mentee file here"
@@ -10,7 +10,7 @@
         let-openFileSelector="openFileSelector"
       >
         <div class="m-2">
-          Optional custom content that replaces the the entire default content.
+          Drag and drop location for the mentee file.
           <button type="button" (click)="openFileSelector()">Browse Files</button>
         </div>
       </ng-template>
@@ -26,7 +26,7 @@
         let-openFileSelector="openFileSelector"
       >
         <div class="m-2">
-          Optional custom content that replaces the the entire default content.
+          Drag and drop location for the mentor file.
           <button type="button" (click)="openFileSelector()">Browse Files</button>
         </div>
       </ng-template>
