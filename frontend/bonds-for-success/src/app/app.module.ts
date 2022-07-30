@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,7 +16,10 @@ import { AppComponent } from './app.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { MenteeMentorTableComponent } from './mentee-mentor-table/mentee-mentor-table.component';
 
+import { MatchedResultsService } from './services/matched-results.service';
 import { TablesService } from './services/tables.service';
+
+import { ApiModule } from './libs/api/generated-code/api';
 
 @NgModule({
   declarations: [
@@ -22,15 +28,20 @@ import { TablesService } from './services/tables.service';
     MenteeMentorTableComponent,
   ],
   imports: [
+    ApiModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     DragDropModule,
+    HttpClientModule,
     MatGridListModule,
+    MatSnackBarModule,
     MatTableModule,
+    MatTabsModule,
     NgxFileDropModule,
   ],
   providers: [
+    MatchedResultsService,
     TablesService,
   ],
   bootstrap: [AppComponent]

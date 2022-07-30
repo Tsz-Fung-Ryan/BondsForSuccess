@@ -1,46 +1,60 @@
 <div class="center">
-  <mat-grid-list cols="2">
-    <!-- TODO: Look into replacing these with a conditional template or something -->
-    <mat-grid-tile>
-      <ngx-file-drop
-        dropZoneLabel="Drop mentee file here"
-        (onFileDrop)="handleFileDropped($event, menteeFileIdentifier)" 
+  <div class="d-flex justify-content-between">
+    <ngx-file-drop
+      class="p-2"
+      dropZoneLabel="Drop mentee file here"
+      (onFileDrop)="handleFileDropped($event, menteeFileIdentifier)" 
+    >
+      <ng-template
+        ngx-file-drop-content-tmp
+        let-openFileSelector="openFileSelector"
       >
-        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        <div class="m-2">
           Optional custom content that replaces the the entire default content.
           <button type="button" (click)="openFileSelector()">Browse Files</button>
-        </ng-template>
-      </ngx-file-drop>
-    </mat-grid-tile>
+        </div>
+      </ng-template>
+    </ngx-file-drop>
 
-    <mat-grid-tile>
-      <ngx-file-drop
+    <ngx-file-drop
+      class="p-2"
       dropZoneLabel="Drop mentor file here"
       (onFileDrop)="handleFileDropped($event, mentorFileIdentifier)" 
     >
-      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-        Optional custom content that replaces the the entire default content.
-        <button type="button" (click)="openFileSelector()">Browse Files</button>
+      <ng-template
+        ngx-file-drop-content-tmp
+        let-openFileSelector="openFileSelector"
+      >
+        <div class="m-2">
+          Optional custom content that replaces the the entire default content.
+          <button type="button" (click)="openFileSelector()">Browse Files</button>
+        </div>
       </ng-template>
     </ngx-file-drop>
-    </mat-grid-tile>
-  </mat-grid-list>
+  </div>
 
-  <div class="upload-table">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody class="upload-name-style">
-        <tr>
-          <td><strong>{{ menteeFile?.relativePath }}</strong></td>
-        </tr>
-        <tr>
-          <td><strong>{{ mentorFile?.relativePath }}</strong></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="d-flex flex-column align-items-center">
+    <div class="w-50 m-2 d-flex justify-content-center">
+      <table class="table">
+        <caption>Table of the files to be uploaded.</caption>
+        <thead>
+          <tr>
+            <th>File Names</th>
+          </tr>
+        </thead>
+        <tbody class="border">
+          <tr class="border" *ngIf="menteeFile">
+            <td class="border"><strong>{{ menteeFile?.relativePath }}</strong></td>
+          </tr>
+          <tr class="border" *ngIf="mentorFile">
+            <td class="border"><strong>{{ mentorFile?.relativePath }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="m-2">
+      <button type="button" (click)="uploadMenteeMentorFiles()">Upload Mentee And Mentor Files</button>
+    </div>
   </div>
 </div>
