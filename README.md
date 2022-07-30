@@ -23,8 +23,14 @@ How to Run the Project
   Running the frontend (this is assuming you have already installed java for the backend setup)
     1. Install Node
       a. Open https://nodejs.org/en/download/ in a browser and click the download button for the installer for your operating system (mac or windows)
-    2. Open a command prompt (or a terminal if you are on a mac computer) and navigate to the frontend folder
-    3. Run the following commands `npm install`, `npm run generate:api` and `ng serve`
-      a. To run a command just type/copy the command from above and put it in the command prompt/terminal you opened
-      b. Hit enter and the command will run
-      c. Run all 3 commands in succession, then you can open a browser and enter the following url `http://localhost:4200/` to see the application
+    2. Open the project folder if you haven't already and navigate to the frontend -> bonds-for-success folder
+    3. Double click the executable file to setup and start the frontend of the project
+      a. If you are on a windows computer, double click the `Setup-And-Run-Frontend-Windows.cmd` file
+      b. If you are on a mac computer, double click the `Setup-And-Run-Frontend-Mac.command` file
+        i. If the `.command` file doesn't execute you might have to give the file execute permissions
+          1. Click the `Setup-And-Run-Frontend-Mac.command` file and from the `File` menu, select `Get Info`
+          2. Click the disclosure triangle next to Sharing & Permissions to display permissions for the selected file or folder
+          3. Click the lock and authenticate with an administrator account
+          4. Use the menus next to users and groups to change the permissions for your account (it would be the entry with `me` in the name)
+          5. Close the Info window
+          6. You should now be able to double click the `Setup-And-Run-Frontend-Mac.command` file to run the frontend
