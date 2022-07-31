@@ -14,11 +14,9 @@ How to Run the Project
     4. Unzip the downloaded zip file somewhere
 
   Running the backend
-    1. Install Java 18
-    2. Setup Path variable
-    3. Setup JAVA_HOME variable
-    4. Open a cmd prompt and navigate to the backend folder
-    5. Run `mvnw spring-boot:run`
+    1. Install Java 18: https://www.oracle.com/java/technologies/downloads/
+    2. Head to the backend folder
+    3. Double click on the jar to turn on the backend
     
   Running the frontend (this is assuming you have already installed java for the backend setup)
     1. Install Node
@@ -34,3 +32,18 @@ How to Run the Project
           4. Use the menus next to users and groups to change the permissions for your account (it would be the entry with `me` in the name)
           5. Close the Info window
           6. You should now be able to double click the `Setup-And-Run-Frontend-Mac.command` file to run the frontend
+
+  How to Update the Backend
+    Updating the properties (an installation of maven is required to regenerate the jar)
+      1. Navigate to backend/application.properties
+      2. Under mentee.key.mappings update the properties the following way:
+        a. Write the name of the column then a colon followed by what to map the property to
+          ex: "What is your name?": 'name'
+        b. current sourced properties are: name, emailAddress, genderPreference, gender, keywords
+      3. Repeat step 2 but for mentor.key.mappings using the same structure
+      4. To update the keywords property merely add or remove the indicated keepwords with each one seperated by a comma
+      5. The accepted threshold is the percentage of keywords the program will look for to be considered an "ideal" match do note that with a higher number the later matches will be less optimal (the logs will indicate if an ideal match could not be done with the remainder matches)
+  Troubleshooting steps:
+    1. Ensure the first row contains only the header column (previously there was some filler items ie q1,q2 this will make it hard to generate the mappings)
+    2. Ensure each person is on its own row no new lines are submitted
+    3. If still having issues wrap each cell with "" when it's converted to csv this will ensure each cell is entries are specified    
