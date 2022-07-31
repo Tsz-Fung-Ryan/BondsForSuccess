@@ -41,8 +41,9 @@ How to Run the Project
           ex: "What is your name?": 'name'
         b. current sourced properties are: name, emailAddress, genderPreference, gender, keywords
       3. Repeat step 2 but for mentor.key.mappings using the same structure
-      4. To update the keywords property merely add or remove the indicated keepwords with each one seperated by a comma
-      5. The accepted threshold is the percentage of keywords the program will look for to be considered an "ideal" match do note that with a higher number the later matches will be less optimal (the logs will indicate if an ideal match could not be done with the remainder matches)
+      4. To update the keywords property add or remove the keepwords with each one seperated by a comma
+      5. The accepted threshold is the percentage of keywords the program will look for to be considered an "ideal" match. 
+        Do note that with a higher number the later matches will be less optimal (the logs will indicate if an ideal match could not be done with the remainder matches)
   Troubleshooting steps:
     1. Ensure the first row contains only the header column (previously there was some filler items ie q1,q2 this will make it hard to generate the mappings)
     2. Ensure each person is on its own row no new lines are submitted
