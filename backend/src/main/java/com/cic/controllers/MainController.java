@@ -3,9 +3,9 @@ package com.cic.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +54,10 @@ public class MainController implements HelloWorldApi, CreateTableApi, DownloadFi
   @Override
   public ResponseEntity<List<Match>> createTablePost(MultipartFile menteeFile,
       MultipartFile mentorFile) {
-    Set<Person> mentees = menteeService.convertFileToPeople(menteeFile);
-    Set<Person> mentors = mentorService.convertFileToPeople(mentorFile);
-
+    List<Person> mentees = menteeService.convertFileToPeople(menteeFile);
+    List<Person> mentors = mentorService.convertFileToPeople(mentorFile);
+    Collections.shuffle(mentees);
+    Collections.shuffle(mentors);
     List<Match> matches = matchingService.returnMatches(mentees, mentors);
 
     return ResponseEntity.ok(matches);

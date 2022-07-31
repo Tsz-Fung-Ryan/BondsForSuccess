@@ -1,55 +1,49 @@
 package com.cic.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import com.cic.openapi.model.GenderPreference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.cic.openapi.model.Match;
 import com.cic.openapi.model.Person;
 import com.cic.service.matching.MatchingAlgorithm;
 
 public class MatchingService {
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(MatchingService.class);
   private final MatchingAlgorithm matcher;
-  private final float acceptedThreshold;
 
-  public MatchingService(final MatchingAlgorithm matcher, final float acceptedThreshold) {
+  public MatchingService(final MatchingAlgorithm matcher) {
     this.matcher = matcher;
-    this.acceptedThreshold = acceptedThreshold;
   }
 
-  public List<Match> returnMatches(final Set<Person> mentees, final Set<Person> mentors) {
+  public List<Match> returnMatches(final List<Person> mentees, final List<Person> mentors) {
     final List<Match> matches = new ArrayList<>();
-    final Set<Person> unmatchedMentors = mentors;
-    mentees.forEach(mentee -> {
-      Person mentor = findMentorForMentee(mentee, unmatchedMentors);
-      Match match = new Match();
+    final List<Person> unmatchedMentors = new ArrayList<>();
+    unmatchedMentors.addAll(mentors);
+    LOGGER.info("Mentors to be matched: {} Number of mentors: {}", unmatchedMentors.toString(),
+        unmatchedMentors.size());
+    for (Person mentee : mentees) {
+      final List<Person> tempMentorList = new ArrayList<>();
+      tempMentorList.addAll(unmatchedMentors);
+      final Person mentor = matcher.findMentorForMentee(mentee, tempMentorList);
+      final Match match = new Match();
       match.setMentee(mentee);
       match.setMentor(mentor);
       matches.add(match);
-      unmatchedMentors.remove(mentor);
-    });
-    return matches;
-  }
-
-  private Person findMentorForMentee(final Person mentee, final Set<Person> mentors) {
-    Set<Person> filteredMentors = new HashSet<>();
-    if (mentee.getGenderPreference().equals(GenderPreference.NO_PREFERENCE)) {
-      filteredMentors.addAll(mentors);
-    } else {
-      filteredMentors = mentors.stream().filter(
-          mentor -> mentor.getGender().getValue().equals(mentee.getGenderPreference().getValue()))
-          .collect(Collectors.toSet());
-    }
-
-    for (Person mentor : filteredMentors) {
-      float threshold = matcher.matchingRatio(mentee, mentor);
-      if (threshold >= acceptedThreshold) {
-        return mentor;
+      for (Person mentorToBeRemoved : unmatchedMentors) {
+        if (mentorToBeRemoved.equals(mentor)) {
+          if (unmatchedMentors.remove(mentorToBeRemoved)) {
+            LOGGER.info("Removed: {} size: {}", mentorToBeRemoved.getName(),
+                unmatchedMentors.size());
+            break;
+          } else {
+            LOGGER.error("Unable to remove mentor: {} size: {}", mentorToBeRemoved.getName(),
+                unmatchedMentors.size());
+            break;
+          }
+        }
       }
     }
-    return null;
+    return matches;
   }
 }

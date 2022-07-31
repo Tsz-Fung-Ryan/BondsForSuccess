@@ -21,15 +21,18 @@ public class AppConfig implements WebMvcConfigurer {
   @Value("#{${mentee.key.mappings}}")
   Map<String, PersonKeys> menteeMapping;
 
-  @Value("#{${mentee.key.mappings}}")
+  @Value("#{${mentor.key.mappings}}")
   Map<String, PersonKeys> mentorMapping;
 
   @Value("${acceptedThreshold}")
   float acceptedThreshold;
 
+  @Value("${keywords}")
+  String[] listOfKeywords;
+
   @Bean
   BasicMatcher basicMatcher() {
-    return new BasicMatcher();
+    return new BasicMatcher(acceptedThreshold);
   }
 
   @Override
@@ -39,17 +42,17 @@ public class AppConfig implements WebMvcConfigurer {
 
   @Bean
   MatchingService matchingService() {
-    return new MatchingService(basicMatcher(), acceptedThreshold);
+    return new MatchingService(basicMatcher());
   }
 
   @Bean
   PersonService menteeService() {
-    return new PersonService(menteeMapping);
+    return new PersonService(menteeMapping, listOfKeywords);
   }
 
   @Bean
   PersonService mentorService() {
-    return new PersonService(mentorMapping);
+    return new PersonService(mentorMapping, listOfKeywords);
   }
 
   @Bean

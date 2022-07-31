@@ -12,15 +12,17 @@ import com.cic.service.person.PersonKeys;
 public class DataService {
 
   public File createFile(Match[] matches) {
-    final File csvFile = new File("");
+    final File csvFile = new File("src/main/resources/tempFileForDownload.csv");
     try (OutputStream os = new FileOutputStream(csvFile)) {
-      String headers = writeHeaders();
-      os.write(headers.getBytes());
+      final String overallHeader = tableNameHeaders("Mentee") + tableNameHeaders("Mentor");
+      os.write((overallHeader + "\n").getBytes());
+      final String headers = writeHeaders();
+      os.write((headers + "\n").getBytes());
       for (Match match : matches) {
         final String menteeToCsv = writePersonToCsv(match.getMentee());
         final String mentorToCsv = writePersonToCsv(match.getMentor());
         final String joinToRecords = menteeToCsv + "," + mentorToCsv;
-        os.write(joinToRecords.getBytes());
+        os.write((joinToRecords + "\n").getBytes());
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -36,12 +38,17 @@ public class DataService {
           personToStringArray.add(person.getGender().toString());
           break;
         case keyWords:
-          personToStringArray.add(String.join("|", person.getKeywords()));
+          if (person.getKeywords() != null) {
+            personToStringArray.add(String.join("|", person.getKeywords()));
+          } else {
+            personToStringArray.add("No Keywords");
+          }
           break;
         case emailAddress:
           personToStringArray.add(person.getEmailAddress());
           break;
         case genderPreference:
+          personToStringArray.add(person.getGenderPreference().toString());
           break;
         case name:
           personToStringArray.add(person.getName());
@@ -53,14 +60,19 @@ public class DataService {
     return String.join(",", personToStringArray);
   }
 
+  private String tableNameHeaders(final String tableName) {
+    final String repeatedCommas =
+        new String(new char[PersonKeys.values().length]).replace("\0", ",");
+    return tableName + repeatedCommas;
+  }
+
   private String writeHeaders() {
-    String headerRow = "";
-    for (int i = 0; i < 1; i++) {
+    final List<String> headerRow = new ArrayList<>();
+    for (int i = 0; i < 2; i++) {
       for (PersonKeys personKey : PersonKeys.values()) {
-        headerRow += "," + personKey.toString();
+        headerRow.add(personKey.toString());
       }
     }
-    headerRow = headerRow.substring(0, headerRow.length() - 1);
-    return headerRow;
+    return String.join(",", headerRow);
   }
 }

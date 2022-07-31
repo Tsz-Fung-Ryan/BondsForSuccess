@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,13 +22,13 @@ class PersonServiceTest {
 
   @BeforeEach
   void init() {
-    personService = new PersonService(testMenteeMapping());
+    personService = new PersonService(testMenteeMapping(), listOfKeywords());
   }
 
   @Test
   @DisplayName("GIVEN a csv of survey data WHEN it is fed to the PersonService THEN a Set of people will be created")
   void convertMenteeFileToPersonTest() {
-    Set<Person> people = personService.convertEntriesToPeople(menteePath());
+    List<Person> people = personService.convertEntriesToPeople(menteePath());
     assertTrue(people.size() > 0);
     people.forEach(person -> {
       if (person.getName().equals("Test Name")) {
@@ -41,7 +41,7 @@ class PersonServiceTest {
 
   @Test
   void convertMentorFileToPersonTest() {
-    Set<Person> people = personService.convertEntriesToPeople(mentorPath());
+    List<Person> people = personService.convertEntriesToPeople(mentorPath());
     assertTrue(people.size() > 0);
     people.forEach(person -> {
       if (person.getName().equals("Professor Test")) {
@@ -67,7 +67,17 @@ class PersonServiceTest {
     menteeMapping.put("Do you identify as:", PersonKeys.gender);
     menteeMapping.put("Would you like to be matched with someone of a specific gender?",
         PersonKeys.genderPreference);
+    menteeMapping.put("What area are you studying? - Selected Choice", PersonKeys.keyWords);
 
     return menteeMapping;
+  }
+
+  private String[] listOfKeywords() {
+    final String[] keyWords = {"Doctorate", "Master's", "Chemical Engineering", "Chemistry",
+        "Industry", "Financial", "Managerial", "Research and Development", "Hiring", "Resume",
+        "Government", "Technical", "Entrepreneur", "Start-up", "Academia", "Networking",
+        "Alternative", "Career", "Green", "Leadership", "Scale up", "Transition", "Job Seeking",
+        "Pharma", "Bio", "Safety", "Process", "Analytical"};
+    return keyWords;
   }
 }
