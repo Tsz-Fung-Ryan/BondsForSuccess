@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
 
@@ -13,6 +14,7 @@ describe('FileInputComponent', () => {
         MenteeMentorTableComponent,
       ],
       imports: [
+        HttpClientTestingModule,
         MatTableModule,
       ],
     }).compileComponents();
