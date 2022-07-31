@@ -2,6 +2,7 @@
   "name": "bonds-for-success",
   "version": "0.0.0",
   "scripts": {
+    "start-project": "npm ci && npm run generate:api && ng serve",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
