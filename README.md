@@ -15,8 +15,15 @@ How to Run the Project
 
   Running the backend
     1. Install Java 18: https://www.oracle.com/java/technologies/downloads/
-    2. Head to the backend folder
-    3. Double click on the jar to turn on the backend
+    2. Add the Java to path and Home variables: (the folder containing java is usually `C:\Program Files\Java\jdk-18.0.1.1`)
+    3. Go to backend and select `RunBackend.cmd` if windows and `RunBackend.command` if mac
+      i. If the `.command` file doesn't execute you might have to give the file execute permissions
+          1. Click the `RunBackend.command` file and from the `File` menu, select `Get Info`
+          2. Click the disclosure triangle next to Sharing & Permissions to display permissions for the selected file or folder
+          3. Click the lock and authenticate with an administrator account
+          4. Use the menus next to users and groups to change the permissions for your account (it would be the entry with `me` in the name)
+          5. Close the Info window
+          6. You should now be able to double click the `Setup-And-Run-Frontend-Mac.command` file to run the frontend
     
   Running the frontend (this is assuming you have already installed java for the backend setup)
     1. Install Node
