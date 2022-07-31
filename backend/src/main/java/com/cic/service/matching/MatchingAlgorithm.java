@@ -1,8 +1,10 @@
 package com.cic.service.matching;
 
-public abstract class MatchingAlgorithm {
+import java.util.List;
+import com.cic.openapi.model.Person;
 
-  public MatchingAlgorithm() {}
+public interface MatchingAlgorithm {
 
-  public abstract float matchingRatio(String[] participant1, String[] participant2);
+  public abstract Person findMentorForMentee(final Person participant1,
+      final List<Person> unmatchedMentors);
 }
