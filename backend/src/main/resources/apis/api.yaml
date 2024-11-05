@@ -75,6 +75,7 @@ components:
         - Male
         - Female
         - Other
+        - Prefer not to say
     GenderPreference:
       type: string
       enum:

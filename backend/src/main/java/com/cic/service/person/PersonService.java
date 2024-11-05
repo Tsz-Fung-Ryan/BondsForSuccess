@@ -75,11 +75,20 @@ public class PersonService {
             }
             break;
           case gender:
+            try {
             person.setGender(Gender.fromValue(personAttribute));
+            }catch (IllegalArgumentException e){
+              throw new IllegalStateException(String.format("Failed to get gender for %s", person.getName()), e);
+            }
             break;
           case genderPreference:
-            person.setGenderPreference(GenderPreference.fromValue(personAttribute));
-            break;
+            try {
+              GenderPreference preference = GenderPreference.fromValue(personAttribute);
+              person.setGenderPreference(GenderPreference.fromValue(personAttribute));
+            }catch (IllegalArgumentException e){
+            throw new IllegalStateException(String.format("Failed to get gender preference for %s", person.getName()), e);
+          }
+          break;
         }
       }
     });

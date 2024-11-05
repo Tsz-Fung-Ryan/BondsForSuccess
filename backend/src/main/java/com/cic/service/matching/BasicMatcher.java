@@ -21,6 +21,9 @@ public class BasicMatcher implements MatchingAlgorithm {
   @Override
   public Person findMentorForMentee(final Person mentee, final List<Person> unmatchedMentors) {
     float threshold = 0;
+    if(LOGGER.isTraceEnabled()) {
+      LOGGER.trace("Mentee that is being matched: {}", mentee.toString());
+    }
     Person mentorWithHighestThreshold = unmatchedMentors.get(0);
     List<Person> mentorsToFind = new ArrayList<>();
     mentorsToFind.addAll(unmatchedMentors);
@@ -41,8 +44,7 @@ public class BasicMatcher implements MatchingAlgorithm {
 
   private float findMatchingRatio(final Set<String> menteeKeywords,
       final Set<String> mentorKeywords) {
-    Set<String> keywords = new HashSet<>();
-    keywords.addAll(menteeKeywords);
+      Set<String> keywords = new HashSet<>(menteeKeywords);
     if (mentorKeywords.size() > menteeKeywords.size()) {
       keywords.retainAll(mentorKeywords);
       return (float) keywords.size() / mentorKeywords.size() * 100;
