@@ -112,10 +112,13 @@ public class PersonService {
     return headerMap;
   }
 
-  public List<Person> convertFileToPeople(MultipartFile file) {
-    File tempTable = new File("src/main/resources/initTable.tmp");
-    try (OutputStream os = new FileOutputStream(tempTable)) {
+  public List<Person> convertFileToPeople(MultipartFile file)  {
+    try  {
+      File tempTable = File.createTempFile("initTable","tmp");
+      tempTable.deleteOnExit();
+      OutputStream os = new FileOutputStream(tempTable);
       os.write(file.getBytes());
+      os.close();
       return convertEntriesToPeople(tempTable.toPath());
     } catch (Exception e) {
       LOGGER.error("Error occured creating people: ", e);

@@ -81,7 +81,7 @@ components:
       enum:
         - Male
         - Female
-        - No Preference
+        - No preference
     Match:
       type: object
       properties:

@@ -11,9 +11,8 @@ import com.cic.service.person.PersonKeys;
 
 public class DataService {
 
-  public File createFile(Match[] matches) {
-    final File csvFile = new File("src/main/resources/tempFileForDownload.csv");
-    try (OutputStream os = new FileOutputStream(csvFile)) {
+  public void createFile(Match[] matches, File file) {
+    try (OutputStream os = new FileOutputStream(file)) {
       final String overallHeader = tableNameHeaders("Mentee") + tableNameHeaders("Mentor");
       os.write((overallHeader + "\n").getBytes());
       final String headers = writeHeaders();
@@ -27,7 +26,6 @@ public class DataService {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return csvFile;
   }
 
   private String writePersonToCsv(final Person person) {

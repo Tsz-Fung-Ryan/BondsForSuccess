@@ -3,6 +3,7 @@ package com.cic.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -65,14 +66,15 @@ public class MainController implements HelloWorldApi, CreateTableApi, DownloadFi
 
   @Override
   public ResponseEntity<Resource> downloadFilePost(List<Match> matches) {
-    File csvFile = dataService.createFile(matches.toArray(new Match[0]));
-    InputStreamResource resource;
     try {
-      resource = new InputStreamResource(new FileInputStream(csvFile));
-    } catch (FileNotFoundException e) {
+    File csvFile = File.createTempFile("download",".csv");
+    csvFile.deleteOnExit();
+    dataService.createFile(matches.toArray(new Match[0]),csvFile);
+    InputStreamResource resource = new InputStreamResource(new FileInputStream(csvFile));
+    return ResponseEntity.ok().body(resource);
+    } catch (Exception e) {
       LOGGER.error("Error occured converting file to resource: ", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-    return ResponseEntity.ok().body(resource);
   }
 }
